@@ -22,10 +22,9 @@ return Application::configure(basePath: dirname(__DIR__))
             'force.https' => \App\Http\Middleware\ForceHttps::class,
         ]);
 
-        // Apply HTTPS enforcement globally in production
-        if (app()->environment('production')) {
-            $middleware->append(\App\Http\Middleware\ForceHttps::class);
-        }
+        // Apply HTTPS enforcement globally
+        // The middleware itself checks if it's production before redirecting
+        $middleware->append(\App\Http\Middleware\ForceHttps::class);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //
